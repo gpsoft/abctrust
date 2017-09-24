@@ -1,0 +1,65 @@
+HOME = .
+RANDFILE = $ENV::HOME/.rnd
+
+[ca]
+default_ca = CA_default
+
+[CA_default]
+dir = ./rootCA
+database = $dir/index.txt
+new_certs_dir = $dir/out
+certificate = $dir/rootcert.pem
+serial = $dir/serial
+private_key = $dir/rootkey.pem
+x509_extensions = usr_cert
+default_days = 365
+default_md = default
+preserve = no
+policy = policy_anything
+
+[policy_anything]
+commonName = supplied
+countryName = optional
+stateOrProvinceName = optional
+localityName = optional
+organizationName = optional
+organizationalUnitName = optional
+emailAddress = optional
+
+[req]
+default_bits = 2048
+distinguished_name = req_distinguished_name
+attributes = req_attributes
+x509_extensions = v3_ca
+string_mask = utf8only
+
+[req_distinguished_name]
+commonName = Common Name (e.g. www.hoge.com, localhost, or Dr.Watson)
+commonName_max = 64
+countryName = Country Name
+countryName_default = JP
+countryName_min = 2
+countryName_max = 2
+stateOrProvinceName = State or Province Name (full name)
+localityName = Locality Name (eg, city)
+0.organizationName = Organization Name (eg, company)
+organizationalUnitName = Organizational Unit Name (eg, section)
+emailAddress = Email Address
+emailAddress_max = 64
+
+[req_attributes]
+challengePassword = A challenge password
+challengePassword_min = 4
+challengePassword_max = 20
+unstructuredName = An optional company name
+
+[usr_cert]
+basicConstraints=CA:FALSE
+nsComment = "OpenSSL Generated Certificate"
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid,issuer
+
+[v3_ca]
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer
+basicConstraints = CA:true
