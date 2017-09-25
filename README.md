@@ -57,4 +57,13 @@ $ SITE_HOST=www.hoge.com ./issue.sh
   - 原則として、同じサイトの証明書を2回以上発行することはできない
   - どうしても発行したいなら、古いやつをrevokeするか、`index.txt`を削除する
 
+## Dockerで
+
+opensslがインストールされてない、インストールしたくない、という場合は、Dockerで。
+
+```shell-session
+$ make image
+$ make issue
+$ make issue www.hoge.com
+```
 
